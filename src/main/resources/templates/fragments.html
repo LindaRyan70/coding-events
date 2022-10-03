@@ -8,22 +8,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js00"></script>
 
-<!-- the codes below reference the files in the resources/static filepath. -->
+<!-- Don't need below since added Bootstrap CSS and JavaScript above. The codes below reference the files in the resources/static filepath. -->
 <!--    <script th:src="@{/script.js}"></script>-->
 <!--    <link th:href="@{/styles.css}" rel="stylesheet">-->
 
 </head>
 <body>
-
-<!--The nav block below has been made a fragment named 'navigation' to reuse in other templates.-->
-<!--<nav th:fragment="navigation">-->
-<!--    <ul>-->
-<!--        <li><a href="/events">All Events</a></li>-->
-<!--        <li><a href="/events/create">Create Event</a></li>-->
-<!--    </ul>-->
-<!--</nav>-->
-
-
 
 <nav th:fragment="header">
     <h1 th:text="${title}">Coding Events</h1>
@@ -32,7 +22,6 @@
         <li><a href="/events/create">Create Event</a></li>
     </ul>
 </nav>
-
 
 </body>
 </html>
