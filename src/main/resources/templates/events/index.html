@@ -8,6 +8,9 @@
 
 <h1>All Events</h1>
 
+<!-- Line below will be replaced by fragment named 'navigation' defined in fragments.html template.-->
+<nav th:replace="fragments :: navigation"></nav>
+
 <p th:unless="${events} and ${events.size()}">No Events!</p>
 
 <ul>

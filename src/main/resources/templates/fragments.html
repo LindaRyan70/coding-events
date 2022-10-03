@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<!--The nav block below has been made a fragment named 'navigation' to reuse in other templates.-->
+<nav th:fragment="navigation">
+    <ul>
+        <li><a href="/events">All Events</a></li>
+        <li><a href="/events/create">Create Event</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>
