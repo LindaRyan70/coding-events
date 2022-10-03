@@ -16,12 +16,23 @@
 <body>
 
 <!--The nav block below has been made a fragment named 'navigation' to reuse in other templates.-->
-<nav th:fragment="navigation">
+<!--<nav th:fragment="navigation">-->
+<!--    <ul>-->
+<!--        <li><a href="/events">All Events</a></li>-->
+<!--        <li><a href="/events/create">Create Event</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+
+
+<nav th:fragment="header">
+    <h1 th:text="${title}">Coding Events</h1>
     <ul>
         <li><a href="/events">All Events</a></li>
         <li><a href="/events/create">Create Event</a></li>
     </ul>
 </nav>
+
 
 </body>
 </html>

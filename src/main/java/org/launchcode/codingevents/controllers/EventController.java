@@ -19,22 +19,15 @@ public class EventController {
 
     @GetMapping
     public String displayAllEvents(Model model) {
-
-        // Removed the set/unchanging list of data and refactor to allow for user inputted form data.
-//        List<String> theEvents = new ArrayList<>();    // List refers to the interface level that contains ArrayList.
-//        theEvents.add("Code With Pride");
-//        theEvents.add("Strange Loop");
-//        theEvents.add("Apple WWDC");
-//        theEvents.add("SpringOne Platform");
-//        model.addAttribute("events", theEvents);
-
+        model.addAttribute("title", "All Events");
         model.addAttribute("events", events);
         return "events/index";
     }
 
     // Lives at /events/create
     @GetMapping("create")
-    public String renderCreateEventForm() {
+    public String renderCreateEventForm(Model model) {
+        model.addAttribute("title", "Create Event");
         return "events/create";
     }
 

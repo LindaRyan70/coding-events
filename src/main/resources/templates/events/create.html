@@ -3,16 +3,15 @@
 <head th:replace="fragments :: head"></head>
 <body>
 
-<h1>Create Event</h1>
-
-<!-- Line below will be replaced by fragment named 'navigation' defined in fragments.html template.-->
-<nav th:replace="fragments :: navigation"></nav>
+<!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
+<header th:replace="fragments :: header"></header>
 
 <form method="post" action="/events/create">
     <input type="text" name="eventName">
-    <input type="submit" value="Create Event">
+<!-- the input value='create' is simply what the text will be inside the submit button on the web page.
+Not the same as an attribute name='valueVariable'.-->
+    <input type="submit" value="Create">
 </form>
-
 
 </body>
 </html>
