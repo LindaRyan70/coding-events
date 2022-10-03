@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
+<!--Defined <head> section as a fragment to access anywhere in the site.-->
+<head th:fragment="head">
     <meta charset="UTF-8"/>
-    <title></title>
+    <title>Coding Events</title>
+<!-- the codes below reference the files in the resources/static filepath. -->
+    <script th:src="@{/script.js}"></script>
+    <link th:href="@{/styles.css}" rel="stylesheet">
+
 </head>
 <body>
 
