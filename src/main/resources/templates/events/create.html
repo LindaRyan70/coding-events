@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container">
 
 <!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
 <header th:replace="fragments :: header"></header>
 
 <form method="post" action="/events/create">
-    <input type="text" name="eventName">
+    <div class="form-group">
+        <label>Name
+            <input type="text" name="eventName" class="form-control">
+        </label>
+    </div>
 <!-- the input value='create' is simply what the text will be inside the submit button on the web page.
 Not the same as an attribute name='valueVariable'.-->
-    <input type="submit" value="Create">
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
 </form>
 
 </body>
