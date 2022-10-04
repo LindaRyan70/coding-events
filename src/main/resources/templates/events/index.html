@@ -9,6 +9,7 @@
 <!--Line below prints a message if there are no events entered via the form yet.-->
 <p th:unless="${events} and ${events.size()}">No Events!</p>
 
+<!--Turned off the old code version displaying an <ul> of event names, prior to refactoring as a Table.-->
 <!--<ul>-->
 <!--    <th:block th:each="event : ${events}">-->
 <!--        <li th:text="${event}"></li>-->
@@ -17,13 +18,17 @@
 
 <table class="table table-striped">
     <thead>
-    <tr>
-        <th>Name</th>
-    </tr>
+        <tr>
+            <th>Event Name</th>
+            <th>Description</th>
+            <th>Address</th>
+        </tr>
     </thead>
-    <tr th:each="event : ${events}">
-        <td th:text="${event}"></td>
-    </tr>
+        <tr th:each="event : ${events}">
+            <td th:text="${event}"></td>
+            <td th:replace="fragments :: description"></td>
+            <td th:replace="fragments :: address"></td>
+        </tr>
 </table>
 
 </body>
