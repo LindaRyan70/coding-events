@@ -36,8 +36,8 @@ public class EventController {
     // Handles the form submission data.
     // Lives at /events/create
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName) { // variable MUST match form input name/value in html file
-        events.add(new Event(eventName));
+    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) { // variable MUST match form input name/value in html file
+        events.add(new Event(eventName, eventDescription));
         return "redirect:";  // redirects by default to root path for this controller (same as 'redirect:/events')
     }
 
