@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,8 @@ import java.util.List;
 public class EventController {
 
     // Create new static field to hold/handle form data submitted. Use in createEvent() below.
-    private static List<String> events = new ArrayList<>();
+//    private static List<String> events = new ArrayList<>();
+    private static List<Event> events = new ArrayList<>();
 
     @GetMapping
     public String displayAllEvents(Model model) {
@@ -35,7 +37,7 @@ public class EventController {
     // Lives at /events/create
     @PostMapping("create")
     public String createEvent(@RequestParam String eventName) { // variable MUST match form input name/value in html file
-        events.add(eventName);
+        events.add(new Event(eventName));
         return "redirect:";  // redirects by default to root path for this controller (same as 'redirect:/events')
     }
 
