@@ -27,6 +27,13 @@
         <td th:text="${event.id}"></td>
         <td th:text="${event.name}"></td>
         <td th:text="${event.description}"></td>
+
+<!--  The added table data contains a link that utilizes the individual event's ID for the @GetMapping("edit/{eventId}")
+and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId).   -->
+        <td>
+            <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
+        </td>
+
     </tr>
 </table>
 

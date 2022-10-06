@@ -42,8 +42,8 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     // Handles the form submission data.
     // Lives at /events/create
     @PostMapping("create")
-//    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) { // variable MUST match form input name/value in html file
-    public String createEvent(@ModelAttribute Event newEvent) { // variable MUST match form input name/value in html file
+//    public String processCreateEventForm(@RequestParam String eventName, @RequestParam String eventDescription) { // variable MUST match form input name/value in html file
+    public String processCreateEventForm(@ModelAttribute Event newEvent) { // variable MUST match form input name/value in html file
 
 //      Original code line.
         //  events.add(new Event(eventName, eventDescription));
@@ -64,7 +64,7 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     }
 
     @PostMapping("delete")
-    public String deleteEvent(@RequestParam(required = false) int[] eventIds) {
+    public String processDeleteEventForm(@RequestParam(required = false) int[] eventIds) {
 
         if (eventIds != null) {
             for (int id : eventIds) {
@@ -72,6 +72,25 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
             }
         }
         return "redirect: ";
+    }
+
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        // controller code will go here
+        Event eventToEdit = EventData.getById(eventId);
+        model.addAttribute("event", eventToEdit);
+        String title = "Edit Event " + eventToEdit.getName() + " (id=" + eventToEdit.getId() + ")";
+        model.addAttribute("title", title);
+        return "events/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String name, String description) {
+        // controller code will go here
+        Event eventToEdit = EventData.getById(eventId);
+        eventToEdit.setName(name);
+        eventToEdit.setDescription(description);
+        return "redirect:";
     }
 
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
+<header th:replace="fragments :: header"></header>
+
+<!--you can also just use action="/event/edit" below-->
+<form method="post" th:action="@{/events/edit}">
+    <div class="form-group">
+        <label>Name
+            <!--  Refactor input to allow for @ModelBinding annotation.   -->
+            <!--  <input type="text" name="eventName" class="form-control">-->
+            <input type="text" name="name" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Description
+            <!--   Refactor input to allow for @ModelBinding annotation.   -->
+            <!--   <input type="text" name="eventDescription" class="form-control">-->
+            <input type="text" name="description" class="form-control">
+        </label>
+    </div>
+    <!-- the input value='create' is simply what the text will be inside the submit button on the web page.
+    Not the same as an attribute name='valueVariable'.-->
+    <div class="form-group">
+        <input type="submit" value="Edit" class="btn btn-success">
+    </div>
+    <input type="hidden" th:value="${event.id}" name="eventId" />
+</form>
+
+</body>
+</html></html>
