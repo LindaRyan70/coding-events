@@ -2,3 +2,10 @@ body {
     font-size: 18px;
     color: purple;
 }
+
+/* This was a solution to fix checkbox not displaying properly on Chrome. */
+
+/* input[type=checkbox]
+{
+  -webkit-appearance:checkbox;
+} */

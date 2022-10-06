@@ -37,7 +37,7 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
 
     // Lives at /events/create
     @GetMapping("create")
-    public String renderCreateEventForm(Model model) {
+    public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         return "events/create";
     }
@@ -51,6 +51,24 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
         //  events.add(new Event(eventName, eventDescription));
         EventData.add(new Event(eventName, eventDescription));
         return "redirect:";  // redirects by default to root path for this controller (same as 'redirect:/events')
+    }
+
+    @GetMapping("delete")
+    public String displayDeleteEventForm(Model model) {
+        model.addAttribute("title", "Delete Events");
+        model.addAttribute("events", EventData.getAll());
+        return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String deleteEvent(@RequestParam(required = false) int[] eventIds) {
+
+        if (eventIds != null) {
+            for (int id : eventIds) {
+                EventData.remove(id);
+            }
+        }
+        return "redirect: ";
     }
 
 }
