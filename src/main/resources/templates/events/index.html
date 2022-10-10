@@ -21,12 +21,15 @@
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Contact Email</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
         <td th:text="${event.id}"></td>
         <td th:text="${event.name}"></td>
         <td th:text="${event.description}"></td>
+<!--  Added email field to Event.java per Chpter 15.2 validation annotations, so had to add to the main events list view. -->
+        <td th:text="${event.contactEmail}"></td>
 
 <!--  The added table data contains a link that utilizes the individual event's ID for the @GetMapping("edit/{eventId}")
 and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId).   -->
