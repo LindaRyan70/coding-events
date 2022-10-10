@@ -6,6 +6,9 @@
 <!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
 <header th:replace="fragments :: header"></header>
 
+
+<p th:text="${errorMsg}" style="color:red;"></p>
+
 <form method="post" action="/events/create">
     <div class="form-group">
         <label>Name

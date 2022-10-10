@@ -19,6 +19,7 @@ public class Event {
     private String description;
 
 //   Chptr 15.2 - Added contact email field, and added this to the constructor as well as getters/setters below.  //
+    @NotBlank
     @Email(message = "Invalid email. Try again!")
     private String contactEmail;
 

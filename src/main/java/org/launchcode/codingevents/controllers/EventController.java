@@ -4,8 +4,10 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +45,17 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     // Lives at /events/create
     @PostMapping("create")
 //    public String processCreateEventForm(@RequestParam String eventName, @RequestParam String eventDescription) { // variable MUST match form input name/value in html file
-    public String processCreateEventForm(@ModelAttribute Event newEvent) { // variable MUST match form input name/value in html file
+
+//    public String processCreateEventForm(@ModelAttribute Event newEvent) { // Added model binding
+
+// Added @Valid validation annotation to ensure rules on Model fields are followed.
+// Also added Errors object
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Create Event");
+            model.addAttribute("errorMsg", "Bad data!");
+            return "events/create";
+        }
 
 //      Original code line.
         //  events.add(new Event(eventName, eventDescription));

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class EventData {
 
-    //need a place to put events (a data structure of some type)
+    // Created this EventData as a separate 'Data Layer' b/c need a place to put events (a data structure/database of some type)
     private static final Map<Integer, Event> events = new HashMap<>();
 
     //  get all events
