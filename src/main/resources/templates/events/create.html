@@ -6,33 +6,39 @@
 <!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
 <header th:replace="fragments :: header"></header>
 
-
-<p th:text="${errorMsg}" style="color:red;"></p>
+<!--    No longer need this general error message since added <p> tags with th:error=  for custom messages from Event.java -->
+<!--<p th:text="${errorMsg}" style="color:red;"></p>-->
 
 <form method="post" action="/events/create">
     <div class="form-group">
         <label>Name
             <!--  Refactor input to allow for @ModelBinding annotation.   -->
             <!--  <input type="text" name="eventName" class="form-control">-->
-            <input type="text" name="name" class="form-control">
+            <!--  The input line also works w/o (type="text") when you use Thymeleaf attribute (th:field=). -->
+            <input type="text" th:field="${event.name}" class="form-control">
         </label>
+        <p class="error" th:errors="${event.name}"></p>
     </div>
     <div class="form-group">
         <label>Description
             <!--   Refactor input to allow for @ModelBinding annotation.   -->
             <!--   <input type="text" name="eventDescription" class="form-control">-->
-            <input type="text" name="description" class="form-control">
+            <!--  The input line also works w/o (type="text") when you use Thymeleaf attribute (th:field=). -->
+            <input type="text" th:field="${event.description}" class="form-control">
         </label>
+        <p class="error" th:errors="${event.description}"></p>
     </div>
     <div class="form-group">
         <label>Contact Email
             <!--  Added Email field to Event.java, along with Validation Annotations per Chptr 15.2, so had to add email
             to the create a new event form page view. -->
-            <input type="text" name="contactEmail" class="form-control">
+            <!--  The input line also works w/o (type="text") when you use Thymeleaf attribute (th:field=). -->
+            <input type="text" th:field="${event.contactEmail}" class="form-control">
         </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
     </div>
-<!-- the input value='create' is simply what the text will be inside the submit button on the web page.
-Not the same as an attribute name='valueVariable'.-->
+    <!-- the input value='create' is simply what the text will be inside the submit button on the web page.
+    Not the same as an attribute name='valueVariable'.-->
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-success">
     </div>

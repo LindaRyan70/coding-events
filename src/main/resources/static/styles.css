@@ -2,6 +2,10 @@ body {
     font-size: 18px;
     color: purple;
 }
+/* Added custom styling for the error messages in the create.html file with class="error".  */
+.error {
+color: red;
+}
 
 /* This was a solution to fix checkbox not displaying properly on Chrome. */
 

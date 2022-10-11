@@ -38,6 +38,7 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
+        model.addAttribute(new Event());    // same as saying:    model.addAttribute('event', new Event());
         return "events/create";
     }
 
@@ -45,15 +46,13 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     // Lives at /events/create
     @PostMapping("create")
 //    public String processCreateEventForm(@RequestParam String eventName, @RequestParam String eventDescription) { // variable MUST match form input name/value in html file
-
 //    public String processCreateEventForm(@ModelAttribute Event newEvent) { // Added model binding
-
 // Added @Valid validation annotation to ensure rules on Model fields are followed.
 // Also added Errors object
     public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
-            model.addAttribute("errorMsg", "Bad data!");
+//            model.addAttribute("errorMsg", "Bad data!");  // No longer need this general error message since using custom messages from Event.
             return "events/create";
         }
 
