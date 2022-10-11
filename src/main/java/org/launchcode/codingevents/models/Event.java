@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Event {
@@ -23,11 +21,27 @@ public class Event {
     @Email(message = "Invalid email. Try again!")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+
+    // Cptr 15.5 Exercises - Model Validation - Added 3 more fields to check validation.
+    @NotBlank(message="Location may not be left blank.")
+    private String location;
+
+    @AssertTrue(message = "Registration is required.")
+    private Boolean register;
+
+    @Positive(message="Number of attendees must be one or more.")
+    private int numberOfAttendees;
+
+
+    public Event(String name, String description, String contactEmail, String location, Boolean register, int numberOfAttendees) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+//  Chptr 15.5 Exercises - Model Validation - Added 3 more fields to the constructor to check validation.
+        this.location = location;
+        this.register = register;
+        this.numberOfAttendees = numberOfAttendees;
     }
 
     public Event() {
@@ -57,6 +71,35 @@ public class Event {
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
+
+
+    //  Chapter 15.6 Exercises - Model Validation - Adding get/set for 3 new fields at the top, along with adding to constructor.
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Boolean getRegister() {
+        return register;
+    }
+
+    public void setRegister(Boolean register) {
+        this.register = register;
+    }
+
+    public int getNumberOfAttendees() {
+        return numberOfAttendees;
+    }
+
+    public void setNumberOfAttendees(int numberOfAttendees) {
+        this.numberOfAttendees = numberOfAttendees;
+    }
+
+
 
     public int getId() {
         return id;

@@ -96,11 +96,14 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description) {
+    public String processEditForm(int eventId, String name, String description, String contactEmail, Boolean register, int numberOfAttendees) {
         // controller code will go here
         Event eventToEdit = EventData.getById(eventId);
         eventToEdit.setName(name);
         eventToEdit.setDescription(description);
+        eventToEdit.setContactEmail(contactEmail);
+        eventToEdit.setRegister(register);
+        eventToEdit.setNumberOfAttendees(numberOfAttendees);
         return "redirect:";
     }
 

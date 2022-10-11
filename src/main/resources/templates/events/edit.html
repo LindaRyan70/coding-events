@@ -3,6 +3,10 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 
+
+<!--NOTE: THIS FILE WAS ADDED FOR CHPTR 14 EXERCISES ALONG WITH EDIT METHOD ON EVENTSCONTROLLER. IT HAS NOT BEEN
+REFACTORED TO ALLOW FOR A REPEAT OF THE VALIDATION CHECKS!-->
+
 <!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
 <header th:replace="fragments :: header"></header>
 
@@ -27,6 +31,29 @@
             <input type="text" name="contactEmail" class="form-control">
         </label>
     </div>
+
+<!-- Chptr 15.6 Exercises - Model Validation - I added the 3 new fields to my edit.html view as well as the edit method on the EventController. -->
+    <div class="form-group">
+        <label>Location
+            <input type="text" name="location" class="form-control">
+        </label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Registration Required?
+            <input type="checkbox" name="register">
+        </label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Number of Attendees
+            <input type="text" name="numberOfAttendees" class="form-control">
+        </label>
+    </div>
+    <br>
+
+
+
     <!-- the input value='create' is simply what the text will be inside the submit button on the web page.
     Not the same as an attribute name='valueVariable'.-->
     <div class="form-group">

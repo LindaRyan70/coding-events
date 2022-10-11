@@ -22,17 +22,26 @@
             <th>Name</th>
             <th>Description</th>
             <th>Contact Email</th>
+            <th>Location</th>
+            <th>Registration Required</th>
+            <th>Number of Attendees</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
         <td th:text="${event.id}"></td>
         <td th:text="${event.name}"></td>
         <td th:text="${event.description}"></td>
-<!--  Added email field to Event.java per Chpter 15.2 validation annotations, so had to add to the main events list view. -->
+<!--  Added email field to Event.java per Chpter 15.2 validation annotations. Had to add to main events list view here/above. -->
         <td th:text="${event.contactEmail}"></td>
+<!--  Added fields per Chptr 15.6 Exercises so had to add to main events list view here and above.    -->
+        <td th:text="${event.location}"></td>
+        <td th:text="${event.register}"></td>
+        <td th:text="${event.numberOfAttendees}"></td>
 
 <!--  The added table data contains a link that utilizes the individual event's ID for the @GetMapping("edit/{eventId}")
-and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId).   -->
+and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId). -->
+<!--  NOTE: THE EDIT BUTTON BELOW IS NOT REFACTORED TO RUN VALIDATION CHECKS, OR MAINTAIN PREVIOUSLY ADDED DATA, SO
+MAY NEED TO COMMENT THIS LINE OFF BELOW TO REMOVE THE BUTTON/LINK AS AN OPTION.-->
         <td>
             <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
         </td>

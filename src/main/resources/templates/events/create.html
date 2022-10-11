@@ -37,6 +37,28 @@
         </label>
         <p class="error" th:errors="${event.contactEmail}"></p>
     </div>
+<!--   Chptr 15.6 Exercies: Model Validation - Added 3 new fields below and also to the Event model and index.html view.-->
+    <div class="form-group">
+        <label>Location
+            <input type="text" th:field="${event.location}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.location}"></p>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Registration Required?
+            <input type="checkbox" th:field="${event.register}">
+        </label>
+        <p class="error" th:errors="${event.register}"></p>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Number of Attendees
+            <input type="text" th:field="${event.numberOfAttendees}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.numberOfAttendees}"></p>
+    </div>
+    <br>
     <!-- the input value='create' is simply what the text will be inside the submit button on the web page.
     Not the same as an attribute name='valueVariable'.-->
     <div class="form-group">
