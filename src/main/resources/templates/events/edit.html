@@ -51,7 +51,16 @@ REFACTORED TO ALLOW FOR A REPEAT OF THE VALIDATION CHECKS!-->
         </label>
     </div>
     <br>
-
+    <!-- Chptr 16.2 Enums Practice/Video - Adding a drop-down box with the 4 different enum type value choices. -->
+    <div class="form-group">
+        <label>Type of Event
+            <select th:field="${event.type}">
+                <option th:each="type : ${types}" th:value="${type}" th:text="${type.displayName}">
+                </option>
+            </select>
+        </label>
+    </div>
+    <br>
 
 
     <!-- the input value='create' is simply what the text will be inside the submit button on the web page.

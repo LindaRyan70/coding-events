@@ -2,6 +2,7 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -39,6 +40,8 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         model.addAttribute(new Event());    // same as saying:    model.addAttribute('event', new Event());
+        // Chptr 16.2 - add a new attribute below that returns an Array of the 4 different enum type constant values.
+        model.addAttribute("types", EventType.values());
         return "events/create";
     }
 
@@ -53,16 +56,16 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
 //            model.addAttribute("errorMsg", "Bad data!");  // No longer need this general error message since using custom messages from Event.
+           // Chptr 16.2 - Enums - Line below will reload EventType enums in Model if page reloads due to validation error.
+            model.addAttribute("types", EventType.values());
             return "events/create";
         }
-
 //      Original code line.
-        //  events.add(new Event(eventName, eventDescription));
-
-        //  Refactor line above per below to add a single event into its internal collection on the EventData object.
+//        events.add(new Event(eventName, eventDescription));
+//      Refactor line to add a single event into its internal collection on the EventData object.
 //        EventData.add(new Event(eventName, eventDescription));
 
-        // Refactor line below after utilizing model-binding annotation in method param above.
+//      Refactor line after utilizing model-binding annotation in method param above.
         EventData.add(newEvent);
         return "redirect:";  // redirects by default to root path for this controller (same as 'redirect:/events')
     }
@@ -92,11 +95,13 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
         model.addAttribute("event", eventToEdit);
         String title = "Edit Event " + eventToEdit.getName() + " (id=" + eventToEdit.getId() + ")";
         model.addAttribute("title", title);
+        // Chptr 16.2 - Enums - Line below will reload EventType enums in Model if page reloads due to validation error.
+        model.addAttribute("types", EventType.values());
         return "events/edit";
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description, String contactEmail, Boolean register, int numberOfAttendees) {
+    public String processEditForm(int eventId, String name, String description, String contactEmail, Boolean register, int numberOfAttendees, EventType type) {
         // controller code will go here
         Event eventToEdit = EventData.getById(eventId);
         eventToEdit.setName(name);
@@ -104,6 +109,7 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
         eventToEdit.setContactEmail(contactEmail);
         eventToEdit.setRegister(register);
         eventToEdit.setNumberOfAttendees(numberOfAttendees);
+        eventToEdit.setType(type);
         return "redirect:";
     }
 

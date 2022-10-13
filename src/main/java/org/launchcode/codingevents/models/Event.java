@@ -32,8 +32,10 @@ public class Event {
     @Positive(message="Number of attendees must be one or more.")
     private int numberOfAttendees;
 
+//  Chptr 16.2 Enums Practice/Video
+    private EventType type;
 
-    public Event(String name, String description, String contactEmail, String location, Boolean register, int numberOfAttendees) {
+    public Event(String name, String description, String contactEmail, String location, Boolean register, int numberOfAttendees, EventType type) {
         this();
         this.name = name;
         this.description = description;
@@ -42,6 +44,9 @@ public class Event {
         this.location = location;
         this.register = register;
         this.numberOfAttendees = numberOfAttendees;
+//  Chptr 16.2 Enums Practice/Video
+        this.type = type;
+
     }
 
     public Event() {
@@ -100,11 +105,22 @@ public class Event {
     }
 
 
+//  Chptr 16.2 Enums Practice/Video
+    public EventType getType(){
+        return type;
+    }
 
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+//  Getter for ID from starter code.
     public int getId() {
         return id;
     }
 
+
+//  Custom toString, equals, hashCode methods:
     @Override
     public String toString() {
         return name;

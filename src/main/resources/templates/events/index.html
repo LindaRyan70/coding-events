@@ -25,6 +25,7 @@
             <th>Location</th>
             <th>Registration Required</th>
             <th>Number of Attendees</th>
+            <th>Type of Event</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -37,9 +38,11 @@
         <td th:text="${event.location}"></td>
         <td th:text="${event.register}"></td>
         <td th:text="${event.numberOfAttendees}"></td>
+<!--  Chptr 16.2 Enums Practice/Video - Add enum types to the main events list view here/above (.displayName) ensures user-friendly version prints.-->
+        <td th:text="${event.type.displayName}"></td>
 
-<!--  The added table data contains a link that utilizes the individual event's ID for the @GetMapping("edit/{eventId}")
-and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId). -->
+        <!--  The added table data contains a link that utilizes the individual event's ID for the @GetMapping("edit/{eventId}")
+        and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId). -->
 <!--  NOTE: THE EDIT BUTTON BELOW IS NOT REFACTORED TO RUN VALIDATION CHECKS, OR MAINTAIN PREVIOUSLY ADDED DATA, SO
 MAY NEED TO COMMENT THIS LINE OFF BELOW TO REMOVE THE BUTTON/LINK AS AN OPTION.-->
         <td>
