@@ -16,6 +16,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	Insert dependency to add the Spring Data JPA (Java Persistence API). Contains the ORM (Object Relational Mapping) code
+//		to allow translation from object to ANY relational database. //
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	Insert dependency b/c we will use/add the MySQL ORM (Object Relational Mapper). This will pull in the correct version
+// 		to work with SpringBoot. //
+	implementation 'mysql:mysql-connector-java'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
