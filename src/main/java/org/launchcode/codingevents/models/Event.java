@@ -1,12 +1,20 @@
 package org.launchcode.codingevents.models;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
+//  Chptr 17.2.3 Creating Persistent Models - Adding @ annotations to allow Hibernate to find/create database tables for MySQL
+@Entity     // Tells SpringBoot that this is a persistent class/object, so Event objects can be stored outside of our app in a database.
 public class Event {
 
+//  Chptr 17.2.3
+    @Id    // Tells app that this is a PRIMARY KEY
+    @GeneratedValue     //  Tells app that the database will do the work of assigning/generating the primary key value.
     private int id;
-    private static int nextId = 1;
+
+//    Chpt 17.2.3 - Delete manual id increment code b/c the @GeneratedValue above will now handle that in the Database.
+//    private static int nextId = 1;
 
     //   Chptr 15.2 - Added Validation Annotations for name, description, email. //
     @NotBlank(message = "Name is required.")
@@ -36,7 +44,9 @@ public class Event {
     private EventType type;
 
     public Event(String name, String description, String contactEmail, String location, Boolean register, int numberOfAttendees, EventType type) {
-        this();
+//  Chptr 17.2.3 Creating Persistent Models
+//  Delete this() line below, calling the empty constructor b/c not calling getters/setters or doing anything anymore.
+//        //        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
@@ -46,13 +56,17 @@ public class Event {
         this.numberOfAttendees = numberOfAttendees;
 //  Chptr 16.2 Enums Practice/Video
         this.type = type;
-
     }
 
-    public Event() {
-        this.id = nextId;
-        nextId++;
-    }
+//  Chptr 17.2.3 Creating Persistent Models
+//  Delete extra id constructor and replace with empty/no arg constructor below it.
+
+//    public Event() {
+//        this.id = nextId;
+//        nextId++;
+//    }
+
+    public Event() {}   // Entity class MUST have both regular constructor AND this EMPTY/NO ARG constructor for database use.
 
     public String getName() {
         return name;
