@@ -1,0 +1,39 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title></title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
+<header th:replace="fragments :: header"></header>
+
+<!--Line below prints a message if there are no event categories entered via the form yet.-->
+<p th:unless="${categories} and ${categories.size()}">No Event Categories!</p>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+<!--        <th>ID</th>-->
+        <th>Category Name</th>
+    </tr>
+    </thead>
+    <tr th:each="category : ${categories}">
+<!--        <td th:text="${category.id}"></td>-->
+        <td th:text="${category.name}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

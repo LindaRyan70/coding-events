@@ -17,11 +17,18 @@ You can use both those custom/private styling files AND public Bootstrap styling
 <body>
 
 <nav th:fragment="header">
-    <h1 th:text="${title}">Coding Events</h1>
+<!--    I updated the line below to always link the top heading back to the main home page by adding nav=link. -->
+<!--    <h1 th:text="${title}">Coding Events</a></h1>-->
+    <h1 class="nav-item"><a class="nav-link" href="/" th:text="${title}">Coding Events</a></h1>
     <ul class="nav">
         <li class="nav-item"><a class="nav-link" href="/events">All Events</a></li>
         <li class="nav-item"><a class="nav-link" href="/events/create">Create Event</a></li>
         <li class="nav-item"><a class="nav-link" href="/events/delete">Delete Events</a></li>
+<!-- Chapter 17.4 Exercise: I had to add nav link headings to the fragment for template links for EventCategoryController. -->
+        <li class="nav-item"><a class="nav-link" href="/eventCategories">All Categories</a></li>
+        <li class="nav-item"><a class="nav-link" href="/eventCategories/create">Create Category</a></li>
+<!-- MY EXTRA Chapter 17.4 Exercises: I decided to add a Delete Categories controller method and template for extra practice. -->
+        <li class="nav-item"><a class="nav-link" href="/eventCategories/delete">Delete Category</a></li>
     </ul>
 </nav>
 

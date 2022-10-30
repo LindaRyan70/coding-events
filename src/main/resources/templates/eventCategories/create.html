@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
+<header th:replace="fragments :: header"></header>
+
+<!--    No longer need this general error message since added <p> tags with th:error=  for custom messages from Event.java -->
+<!--<p th:text="${errorMsg}" style="color:red;"></p>-->
+
+<form method="post" action="/eventCategories/create">
+    <div class="form-group">
+        <label>Category Name
+            <!--  Refactor input to allow for @ModelBinding annotation.   -->
+            <!--  <input type="text" name="eventName" class="form-control">-->
+            <!--  The input line also works w/o (type="text") when you use Thymeleaf attribute (th:field=). -->
+            <input type="text" th:field="${eventCategory.name}" class="form-control">
+        </label>
+        <p class="error" th:errors="${eventCategory.name}"></p>
+    </div>
+    <br>
+    <!-- the input value='create' is simply what the text will be inside the submit button on the web page.
+    Not the same as an attribute name='valueVariable'.-->
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
+</form>
+
+</body>
+</html>

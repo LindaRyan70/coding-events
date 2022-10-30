@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+
+    <th:block th:each="category : ${categories}">
+        <div class="form-group">
+            <label>
+                <span th:text="${category.name}"></span>
+                <!--    Had to remove   class="form-control"    in order for a normal checkbox to display on Chrome. -->
+                <input type="checkbox" name="eventCategoryIds" th:value="${category.id}">
+                <!--   Alternatively, you can add      class="form-check-input"    below for similar checkboxes.   -->
+                <!--   <input type="checkbox" name="eventCategoryIds" th:value="${eventCategory.id}" class="form-check-input">-->
+            </label>
+        </div>
+    </th:block>
+
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+
+</body>
+</html>
