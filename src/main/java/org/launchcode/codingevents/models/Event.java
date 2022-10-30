@@ -65,7 +65,6 @@ public class Event {
 //        this.id = nextId;
 //        nextId++;
 //    }
-
     public Event() {}   // Entity class MUST have both regular constructor AND this EMPTY/NO ARG constructor for database use.
 
     public String getName() {

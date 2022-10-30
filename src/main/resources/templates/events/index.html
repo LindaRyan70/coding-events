@@ -44,10 +44,12 @@
         <!--  The added table data contains a link that utilizes the individual event's ID for the @GetMapping("edit/{eventId}")
         and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId). -->
 <!--  NOTE: THE EDIT BUTTON BELOW IS NOT REFACTORED TO RUN VALIDATION CHECKS, OR MAINTAIN PREVIOUSLY ADDED DATA, SO
-MAY NEED TO COMMENT THIS LINE OFF BELOW TO REMOVE THE BUTTON/LINK AS AN OPTION.-->
-        <td>
-            <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
-        </td>
+            MAY NEED TO COMMENT THIS LINE OFF BELOW TO REMOVE THE BUTTON/LINK AS AN OPTION.-->
+<!--  NOTE Chpt 17.3: Decided to turn OFF the Edit code from Chapter 14.5 Exercises b/c not sure how to refactor code in
+            order to replace EventData with EventRepository database. And also b/c previous additions in Chpt 15/16. -->
+<!--        <td>-->
+<!--            <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>-->
+<!--        </td>-->
 
     </tr>
 </table>

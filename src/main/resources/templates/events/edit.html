@@ -1,75 +1,82 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
-<body class="container">
+
+<!--    NOTE: Chapter 17.3 - TURNED OFF - This file template is no longer being used after connecting to the MySQL
+            object relational database, b/c I turned OFF all code related to Edit Forms from the Chptr 14.5 Exercise
+            (createEditForm() & processEditForm()) methods in EventController until/unless I figure out how to refactor
+            those controller methods to connect to the EventRepository ORM database. So, no longer utilizing this
+            template or the EventData class code.  -->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
+<!--<head th:replace="fragments :: head"></head>-->
+<!--<body class="container">-->
 
 
-<!--NOTE: THIS FILE WAS ADDED FOR CHPTR 14 EXERCISES ALONG WITH EDIT METHOD ON EVENTSCONTROLLER. IT HAS NOT BEEN
-REFACTORED TO ALLOW FOR A REPEAT OF THE VALIDATION CHECKS!-->
+<!--&lt;!&ndash;NOTE: THIS FILE WAS ADDED FOR CHPTR 14 EXERCISES ALONG WITH EDIT METHOD ON EVENTSCONTROLLER. IT HAS NOT BEEN-->
+<!--REFACTORED TO ALLOW FOR A REPEAT OF THE VALIDATION CHECKS!&ndash;&gt;-->
 
-<!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
-<header th:replace="fragments :: header"></header>
+<!--&lt;!&ndash; Line below will be replaced by fragment named 'header' defined in fragments.html template.&ndash;&gt;-->
+<!--<header th:replace="fragments :: header"></header>-->
 
-<!--you can also just use action="/event/edit" below-->
-<form method="post" th:action="@{/events/edit}">
-    <div class="form-group">
-        <label>Name
-            <!--  Refactor input to allow for @ModelBinding annotation.   -->
-            <!--  <input type="text" name="eventName" class="form-control">-->
-            <input type="text" name="name" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Description
-            <!--   Refactor input to allow for @ModelBinding annotation.   -->
-            <!--   <input type="text" name="eventDescription" class="form-control">-->
-            <input type="text" name="description" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Contact Email
-            <input type="text" name="contactEmail" class="form-control">
-        </label>
-    </div>
+<!--&lt;!&ndash;you can also just use action="/event/edit" below&ndash;&gt;-->
+<!--<form method="post" th:action="@{/events/edit}">-->
+<!--    <div class="form-group">-->
+<!--        <label>Name-->
+<!--            &lt;!&ndash;  Refactor input to allow for @ModelBinding annotation.   &ndash;&gt;-->
+<!--            &lt;!&ndash;  <input type="text" name="eventName" class="form-control">&ndash;&gt;-->
+<!--            <input type="text" name="name" class="form-control">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--        <label>Description-->
+<!--            &lt;!&ndash;   Refactor input to allow for @ModelBinding annotation.   &ndash;&gt;-->
+<!--            &lt;!&ndash;   <input type="text" name="eventDescription" class="form-control">&ndash;&gt;-->
+<!--            <input type="text" name="description" class="form-control">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--        <label>Contact Email-->
+<!--            <input type="text" name="contactEmail" class="form-control">-->
+<!--        </label>-->
+<!--    </div>-->
 
-<!-- Chptr 15.6 Exercises - Model Validation - I added the 3 new fields to my edit.html view as well as the edit method on the EventController. -->
-    <div class="form-group">
-        <label>Location
-            <input type="text" name="location" class="form-control">
-        </label>
-    </div>
-    <br>
-    <div class="form-group">
-        <label>Registration Required?
-            <input type="checkbox" name="register">
-        </label>
-    </div>
-    <br>
-    <div class="form-group">
-        <label>Number of Attendees
-            <input type="text" name="numberOfAttendees" class="form-control">
-        </label>
-    </div>
-    <br>
-    <!-- Chptr 16.2 Enums Practice/Video - Adding a drop-down box with the 4 different enum type value choices. -->
-    <div class="form-group">
-        <label>Type of Event
-            <select th:field="${event.type}">
-                <option th:each="type : ${types}" th:value="${type}" th:text="${type.displayName}">
-                </option>
-            </select>
-        </label>
-    </div>
-    <br>
+<!--&lt;!&ndash; Chptr 15.6 Exercises - Model Validation - I added the 3 new fields to my edit.html view as well as the edit method on the EventController. &ndash;&gt;-->
+<!--    <div class="form-group">-->
+<!--        <label>Location-->
+<!--            <input type="text" name="location" class="form-control">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div class="form-group">-->
+<!--        <label>Registration Required?-->
+<!--            <input type="checkbox" name="register">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div class="form-group">-->
+<!--        <label>Number of Attendees-->
+<!--            <input type="text" name="numberOfAttendees" class="form-control">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    &lt;!&ndash; Chptr 16.2 Enums Practice/Video - Adding a drop-down box with the 4 different enum type value choices. &ndash;&gt;-->
+<!--    <div class="form-group">-->
+<!--        <label>Type of Event-->
+<!--            <select th:field="${event.type}">-->
+<!--                <option th:each="type : ${types}" th:value="${type}" th:text="${type.displayName}">-->
+<!--                </option>-->
+<!--            </select>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <br>-->
 
 
-    <!-- the input value='create' is simply what the text will be inside the submit button on the web page.
-    Not the same as an attribute name='valueVariable'.-->
-    <div class="form-group">
-        <input type="submit" value="Edit" class="btn btn-success">
-    </div>
-    <input type="hidden" th:value="${event.id}" name="eventId" />
-</form>
+<!--    &lt;!&ndash; the input value='create' is simply what the text will be inside the submit button on the web page.-->
+<!--    Not the same as an attribute name='valueVariable'.&ndash;&gt;-->
+<!--    <div class="form-group">-->
+<!--        <input type="submit" value="Edit" class="btn btn-success">-->
+<!--    </div>-->
+<!--    <input type="hidden" th:value="${event.id}" name="eventId" />-->
+<!--</form>-->
 
-</body>
-</html></html>
+<!--</body>-->
+<!--</html></html>-->
