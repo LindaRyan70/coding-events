@@ -8,11 +8,12 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-public class EventCategory {
+public class EventCategory extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
+    //  Chptr 17.5 Studio removes duplicate id field and places it in AbstractEntity class that EventCategory extends. //
+//    @Id
+//    @GeneratedValue
+//    private int id;
 
     @NotBlank(message = "Name is required.")
     @Size(min = 3, max = 50, message = "Named must be between 3 and 50 characters.")
@@ -24,9 +25,10 @@ public class EventCategory {
 
     public EventCategory() {}
 
-    public int getId() {
-        return id;
-    }
+    //  Chptr 17.5 Studio removes duplicate getId() method and places it in AbstractEntity class that EventCategory extends. //
+//    public int getId() {
+//        return id;
+//    }
 
     public String getName() {
             return name;
@@ -41,16 +43,19 @@ public class EventCategory {
         return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EventCategory that = (EventCategory) o;
-        return id == that.id;
-    }
+    //  Chptr 17.5 Studio removes duplicate equals() method and places it in AbstractEntity class that EventCategory extends. //
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        EventCategory that = (EventCategory) o;
+//        return id == that.id;
+//    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+    //  Chptr 17.5 Studio removes duplicate hashCod() method and places it in AbstractEntity class that EventCategory extends. //
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
+
 }
