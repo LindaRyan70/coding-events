@@ -1,9 +1,12 @@
 package org.launchcode.codingevents.controllers;
 
 //import org.launchcode.codingevents.data.EventData;
+import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
-import org.launchcode.codingevents.models.EventType;
+// Chptr 18.2 - Many-to-One Relationship - Replaced EventType import below with EventCategory and EventCategoryRepository.
+//import org.launchcode.codingevents.models.EventType;
+import org.launchcode.codingevents.models.EventCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +37,10 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     @Autowired  // Tells Springboot to look for EventRepository object to populate the eventRepository field (throws exception if not).
     private EventRepository eventRepository; // Create field to hold dynamic EventRepository instances from database (replaces static EventData).
 
+    //  Chptr 18.2 - Many-to-One Relationship - Create an instance of EventCategoryRepository in our controller to replace EventType enums..
+    @Autowired
+    private EventCategoryRepository eventCategoryRepository;
+
 /*  17.3 Refactor methods below to use eventRepository field to connect to database instead of static EventData file and
             to access EventRepository interface which implements CrudRepository interface methods:
             findAll(), save(), findById(), etc. */
@@ -56,7 +63,9 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
         model.addAttribute("title", "Create Event");
         model.addAttribute(new Event());    // same as saying:    model.addAttribute('event', new Event());
         // Chptr 16.2 - add a new attribute below that returns an Array of the 4 different enum type constant values.
-        model.addAttribute("types", EventType.values());
+//        model.addAttribute("types", EventType.values());
+        // Chptr 18.2 - Many-to-One Relationship - Replace EventType above to use eventCategoryRepository instead.
+        model.addAttribute("categories", eventCategoryRepository.findAll());
         return "events/create";
     }
 
@@ -72,7 +81,9 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
             model.addAttribute("title", "Create Event");
 //            model.addAttribute("errorMsg", "Bad data!");  // No longer need this general error message since using custom messages from Event.
            // Chptr 16.2 - Enums - Line below will reload EventType enums in Model if page reloads due to validation error.
-            model.addAttribute("types", EventType.values());
+//            model.addAttribute("types", EventType.values());
+            // Chptr 18.2 - Many-to-One Relationship - Replace EventType above to use eventCategoryRepository instead.
+            model.addAttribute("categories", eventCategoryRepository.findAll());
             return "events/create";
         }
 //      Original code line.
@@ -115,7 +126,12 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
         return "redirect: ";
     }
 
-//  NOTE 17.3: Turned OFF 2 Edit Form Methods below b/c not sure how to refactor to replace static EventData with dynamic EventRepository.
+/*  NOTE 17.3: Turned OFF 2 Edit Form Methods below b/c not sure how to refactor to replace static EventData with
+              dynamic EventRepository. Though I WAS able to try and replace the EventType type enums with
+              eventCategoryRepository and eventCategory respectively. But not sure if that will work and need to figure
+              out Event eventToEdit = EventData.getById() lines.... So, keeping commented off for now.
+              */
+
 //    @GetMapping("edit/{eventId}")
 //    public String displayEditForm(Model model, @PathVariable int eventId) {
 //        // controller code will go here
@@ -124,12 +140,14 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
 //        String title = "Edit Event " + eventToEdit.getName() + " (id=" + eventToEdit.getId() + ")";
 //        model.addAttribute("title", title);
 //        // Chptr 16.2 - Enums - Line below will reload EventType enums in Model if page reloads due to validation error.
-//        model.addAttribute("types", EventType.values());
+////        model.addAttribute("types", EventType.values());
+//        // Chptr 18 - Replaced EventType above with eventCategoryRepository below.
+//        model.addAttribute("categories", eventCategoryRepository.findAll());
 //        return "events/edit";
 //    }
-//
+////
 //    @PostMapping("edit")
-//    public String processEditForm(int eventId, String name, String description, String contactEmail, Boolean register, int numberOfAttendees, EventType type) {
+//    public String processEditForm(int eventId, String name, String description, String contactEmail, Boolean register, int numberOfAttendees, EventCategory eventCategory) {
 //        // controller code will go here
 //        Event eventToEdit = EventData.getById(eventId);
 //        eventToEdit.setName(name);
@@ -137,7 +155,9 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
 //        eventToEdit.setContactEmail(contactEmail);
 //        eventToEdit.setRegister(register);
 //        eventToEdit.setNumberOfAttendees(numberOfAttendees);
-//        eventToEdit.setType(type);
+////        eventToEdit.setType(type);
+//        // Chptr 18 - Replaced EventType type line above with eventCategory. Not sure if it will work.
+//        eventToEdit.setEventCategory(eventCategory);
 //        return "redirect:";
 //    }
 

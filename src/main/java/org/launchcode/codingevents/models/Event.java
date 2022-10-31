@@ -42,9 +42,15 @@ public class Event extends AbstractEntity {
     private int numberOfAttendees;
 
 //  Chptr 16.2 Enums Practice/Video
-    private EventType type;
+//    private EventType type;
 
-    public Event(String name, String description, String contactEmail, String location, Boolean register, int numberOfAttendees, EventType type) {
+//  Chptr 18.2 - Many-to-One Relationship - Replace EventType Enum code above with eventCategory field below w/ validation.
+    @ManyToOne
+    @NotNull(message = "An Event Category is required.") //This actually prevents EventCategoryController from using Delete methods.
+    private EventCategory eventCategory;
+
+    //    18.2 - Many-to-One Relationship - Update constructor to remove Event type and take an eventCategory parameter instead.
+    public Event(String name, String description, String contactEmail, String location, Boolean register, int numberOfAttendees, EventCategory eventCategory) {
 //  Chptr 17.2.3 Creating Persistent Models
 //  Delete this() line below, calling the empty constructor b/c not calling getters/setters or doing anything anymore.
 //        //        this();
@@ -56,7 +62,9 @@ public class Event extends AbstractEntity {
         this.register = register;
         this.numberOfAttendees = numberOfAttendees;
 //  Chptr 16.2 Enums Practice/Video
-        this.type = type;
+//        this.type = type;
+//  Chptr 18.2 - Many-to-One Relationship - Update constructor to remove (EventType type) and take an (EventCategory eventCategory) parameter instead.
+        this.eventCategory = eventCategory;
     }
 
     //  Chptr 17.2.3 Creating Persistent Models
@@ -67,6 +75,7 @@ public class Event extends AbstractEntity {
 //    }
 
     public Event() {}   // Entity class MUST have both regular constructor AND this EMPTY/NO ARG constructor for database use.
+
 
     public String getName() {
         return name;
@@ -120,12 +129,21 @@ public class Event extends AbstractEntity {
 
 
 //  Chptr 16.2 Enums Practice/Video
-    public EventType getType(){
-        return type;
+//    public EventType getType(){
+//        return type;
+//    }
+//
+//    public void setType(EventType type) {
+//        this.type = type;
+//    }
+
+    //    18.2 - Many-to-One Relationship - Remove type get/sets above and add getter/setter for eventCategory below, instead.
+    public EventCategory getEventCategory(){
+        return eventCategory;
     }
 
-    public void setType(EventType type) {
-        this.type = type;
+    public void setEventCategory(EventCategory eventCategory) {
+        this.eventCategory = eventCategory;
     }
 
     //  Chptr 17.5 Studio removes duplicate id field and places it in AbstractEntity class that Event extends. //

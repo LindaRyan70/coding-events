@@ -25,7 +25,9 @@
             <th>Location</th>
             <th>Registration Required</th>
             <th>Number of Attendees</th>
-            <th>Type of Event</th>
+<!--            <th>Type of Event</th>-->
+<!--    Chptr 18.2 Many-to-One - Refactor heading. -->
+            <th>Event Category</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -39,7 +41,9 @@
         <td th:text="${event.register}"></td>
         <td th:text="${event.numberOfAttendees}"></td>
 <!--  Chptr 16.2 Enums Practice/Video - Add enum types to the main events list view here/above (.displayName) ensures user-friendly version prints.-->
-        <td th:text="${event.type.displayName}"></td>
+<!--        <td th:text="${event.type.displayName}"></td>-->
+<!--  Chaptr 18.2 Many-to-One - Refactor above to replace EventType enums with EventCategory database.      -->
+        <td th:text="${event.eventCategory.name}"></td>
 
         <!--  The added table data contains a link that utilizes the individual event's ID for the @GetMapping("edit/{eventId}")
         and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId). -->

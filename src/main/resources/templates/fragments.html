@@ -28,7 +28,10 @@ You can use both those custom/private styling files AND public Bootstrap styling
         <li class="nav-item"><a class="nav-link" href="/eventCategories">All Categories</a></li>
         <li class="nav-item"><a class="nav-link" href="/eventCategories/create">Create Category</a></li>
 <!-- MY EXTRA Chapter 17.4 Exercises: I decided to add a Delete Categories controller method and template for extra practice. -->
-        <li class="nav-item"><a class="nav-link" href="/eventCategories/delete">Delete Category</a></li>
+<!-- Unfortunately, in Chapter 18, I realized that I cannot actually delete an EventCategory b/c it causes an SQL constraint
+       error since it is a parent key and causes a foreign key contraint error. See EventCategoryController code comments
+       for more details. Turned this line off below for now, so the option does not display. -->
+<!--        <li class="nav-item"><a class="nav-link" href="/eventCategories/delete">Delete Category</a></li>-->
     </ul>
 </nav>
 
