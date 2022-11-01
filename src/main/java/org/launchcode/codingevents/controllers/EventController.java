@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("events")
@@ -44,16 +45,28 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
 /*  17.3 Refactor methods below to use eventRepository field to connect to database instead of static EventData file and
             to access EventRepository interface which implements CrudRepository interface methods:
             findAll(), save(), findById(), etc. */
+/*  18.3 - Refactor method to remove All from method title and allow for submitting a search parameter as an
+            option (not required). Then provide result options: IF user does not provide a categoryId parameter (null)
+            ELSE if they provide an INVALID categoryId parameter, ELSE a VALID categoryId parameter. */
     @GetMapping
-    public String displayAllEvents(Model model) {
-        model.addAttribute("title", "All Events");
-
+    public String displayEvents(@RequestParam(required = false) Integer categoryId, Model model) {
+        if (categoryId == null) {
+            model.addAttribute("title", "All Events");
         // Refactor line below to update model value to call the getAll() static method on the EventData object.
 //        model.addAttribute("events", events);
 //        model.addAttribute("events", EventData.getAll());
-
 //      17.3 - Refactor line above to replace static EventData.getAll() with dynamic EventRepository field.
-        model.addAttribute("events", eventRepository.findAll());
+            model.addAttribute("events", eventRepository.findAll());
+        } else {
+           Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+           if (result.isEmpty()) {
+               model.addAttribute("title", "Invalid Category Id: " + categoryId);
+           } else {
+                EventCategory category = result.get();
+                model.addAttribute("title", "Events in category: " + category.getName());
+                model.addAttribute("events", category.getEvents());
+           }
+        }
         return "events/index";
     }
 

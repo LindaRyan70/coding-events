@@ -25,13 +25,17 @@
 <table class="table table-striped">
     <thead>
     <tr>
-<!--        <th>ID</th>-->
+        <!-- I had added the ID line to display Category ID heading on the eventCategories/index.html table on the webpage. -->
+<!--        <th>Category ID</th>-->
         <th>Category Name</th>
     </tr>
     </thead>
     <tr th:each="category : ${categories}">
+        <!-- I had added the ID line to display  Category ID values in the eventCategories/index.html table on the webpage. -->
 <!--        <td th:text="${category.id}"></td>-->
-        <td th:text="${category.name}"></td>
+<!--        <td th:text="${category.name}"></td>-->
+<!--  Chptr 18.3 One-To-Many: Refactor <td> to include hyperlink to list all Event objects connected to a given EventCategory. -->
+        <td><a th:text="${category.name}" th:href = "'/events/?categoryId=' + ${category.id}"></a></td>
     </tr>
 </table>
 
