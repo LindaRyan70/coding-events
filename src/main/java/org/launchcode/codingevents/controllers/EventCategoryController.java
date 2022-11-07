@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+//  Chptr 17.4 Exercises OMG the ORM! (Creating a new persistent model/controller/templates to relate to Event. //
 @Controller
 @RequestMapping("eventCategories")
 public class EventCategoryController {
@@ -19,6 +20,7 @@ public class EventCategoryController {
     @Autowired
     private EventCategoryRepository eventCategoryRepository;
 
+    //  Handles the initial eventCategories/index page showing all eventCategory options.
     @GetMapping
     public String displayAllEventCategories(Model model) {
         model.addAttribute("title", "All Categories");
@@ -26,6 +28,7 @@ public class EventCategoryController {
         return "eventCategories/index";
     }
 
+    //  Handles displaying the form to create an EventCategory at eventCategories/create page.
     @GetMapping("create")
     public String renderCreateEventCategoryForm(Model model) {
         model.addAttribute("title", "Create Category");
@@ -33,11 +36,13 @@ public class EventCategoryController {
         return "eventCategories/create";
     }
 
+    // Handles when the form is submitted to add a new EventCategory coming from 'eventCategories/create' and redirecting to root (localhost:8080/eventCategories).
     @PostMapping("create")
     public String processCreateEventCategoryForm(@ModelAttribute @Valid EventCategory newEventCategory, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Category");
-            model.addAttribute(new EventCategory()); // Why is this needed here if not used in the EventController's method?
+//            model.addAttribute(new EventCategory()); // Why is this needed here if not used in the EventController's method?
+            model.addAttribute(newEventCategory); // This variable from param above works the same as line above creating a (new EventCategory())
             return "eventCategories/create";
         }
         eventCategoryRepository.save(newEventCategory);

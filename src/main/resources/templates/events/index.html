@@ -9,49 +9,67 @@
 <!--Line below prints a message if there are no events entered via the form yet.-->
 <p th:unless="${events} and ${events.size()}">No Events!</p>
 
+<!-- Chptr 18.5.1 Persistent Tags (Creating ManyToMany Relationship) - Refactored the initial display of the events at
+        events/index to only display the Event Name as a hyperlink to see the rest of the EventDetail fields. -->
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Event Name</th>
+    </tr>
+    </thead>
+    <tr th:each="event : ${events}">
+        <td><a th:href="'/events/detail?eventId=' + ${event.id}" th:text="${event.name}"></a></td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+<!-- OLD CODE HAS BEEN COMMENTED OUT AND MOVED BELOW, OUTSIDE THE <HTML> AND <BODY> ELEMENTS ABOVE. -->
+
 <!--<ul>-->
 <!--    <th:block th:each="event : ${events}">-->
 <!--        <li th:text="${event}"></li>-->
 <!--    </th:block>-->
 <!--</ul>-->
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Contact Email</th>
-            <th>Location</th>
-            <th>Registration Required</th>
-            <th>Number of Attendees</th>
-<!--            <th>Type of Event</th>-->
-<!--    Chptr 18.2 Many-to-One - Refactor heading. -->
-            <th>Event Category</th>
-        </tr>
-    </thead>
-<!-- Chptr 18.4 OneToOne Relationship - Refactored the <td> lines for all fields moved to the new EventDetails
-     entity class: (description, contactEmail, location, register, and numberOfAttendees) by inserting the eventDetails
-     name into the call, since the fields are no longer direct fields of Event, i.e. (event.eventDetails.description). -->
-    <tr th:each="event : ${events}">
-        <td th:text="${event.id}"></td>
-        <td th:text="${event.name}"></td>
-<!--        <td th:text="${event.description}"></td>-->
-        <td th:text="${event.eventDetails.description}"></td>
-<!--  Added email field to Event.java per Chpter 15.2 validation annotations. Had to add to main events list view here/above. -->
-<!--        <td th:text="${event.contactEmail}"></td>-->
-        <td th:text="${event.eventDetails.contactEmail}"></td>
-<!--  Added fields per Chptr 15.6 Exercises so had to add to main events list view here and above.    -->
-<!--        <td th:text="${event.location}"></td>-->
-        <td th:text="${event.eventDetails.location}"></td>
-<!--        <td th:text="${event.register}"></td>-->
-        <td th:text="${event.eventDetails.register}"></td>
-<!--        <td th:text="${event.numberOfAttendees}"></td>-->
-        <td th:text="${event.eventDetails.numberOfAttendees}"></td>
-<!--  Chptr 16.2 Enums Practice/Video - Add enum types to the main events list view here/above (.displayName) ensures user-friendly version prints.-->
-<!--        <td th:text="${event.type.displayName}"></td>-->
-<!--  Chaptr 18.2 Many-to-One - Refactor above to replace EventType enums with EventCategory database.      -->
-        <td th:text="${event.eventCategory.name}"></td>
+<!--<table class="table table-striped">-->
+<!--    <thead>-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>Name</th>-->
+<!--            <th>Description</th>-->
+<!--            <th>Contact Email</th>-->
+<!--            <th>Location</th>-->
+<!--            <th>Registration Required</th>-->
+<!--            <th>Number of Attendees</th>-->
+<!--&lt;!&ndash;            <th>Type of Event</th>&ndash;&gt;-->
+<!--&lt;!&ndash;    Chptr 18.2 Many-to-One - Refactor heading. &ndash;&gt;-->
+<!--            <th>Event Category</th>-->
+<!--        </tr>-->
+<!--    </thead>-->
+<!--&lt;!&ndash; Chptr 18.4 OneToOne Relationship - Refactored the <td> lines for all fields moved to the new EventDetails-->
+<!--     entity class: (description, contactEmail, location, register, and numberOfAttendees) by inserting the eventDetails-->
+<!--     name into the call, since the fields are no longer direct fields of Event, i.e. (event.eventDetails.description). &ndash;&gt;-->
+<!--    <tr th:each="event : ${events}">-->
+<!--        <td th:text="${event.id}"></td>-->
+<!--        <td th:text="${event.name}"></td>-->
+<!--&lt;!&ndash;        <td th:text="${event.description}"></td>&ndash;&gt;-->
+<!--        <td th:text="${event.eventDetails.description}"></td>-->
+<!--&lt;!&ndash;  Added email field to Event.java per Chpter 15.2 validation annotations. Had to add to main events list view here/above. &ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${event.contactEmail}"></td>&ndash;&gt;-->
+<!--        <td th:text="${event.eventDetails.contactEmail}"></td>-->
+<!--&lt;!&ndash;  Added fields per Chptr 15.6 Exercises so had to add to main events list view here and above.    &ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${event.location}"></td>&ndash;&gt;-->
+<!--        <td th:text="${event.eventDetails.location}"></td>-->
+<!--&lt;!&ndash;        <td th:text="${event.register}"></td>&ndash;&gt;-->
+<!--        <td th:text="${event.eventDetails.register}"></td>-->
+<!--&lt;!&ndash;        <td th:text="${event.numberOfAttendees}"></td>&ndash;&gt;-->
+<!--        <td th:text="${event.eventDetails.numberOfAttendees}"></td>-->
+<!--&lt;!&ndash;  Chptr 16.2 Enums Practice/Video - Add enum types to the main events list view here/above (.displayName) ensures user-friendly version prints.&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${event.type.displayName}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;  Chaptr 18.2 Many-to-One - Refactor above to replace EventType enums with EventCategory database.      &ndash;&gt;-->
+<!--        <td th:text="${event.eventCategory.name}"></td>-->
 
         <!--  The added table data contains a link that utilizes the individual event's ID for the @GetMapping("edit/{eventId}")
         and the accompanying method,  public String displayEditForm(Model model, @PathVariable int eventId). -->
@@ -63,8 +81,6 @@
 <!--            <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>-->
 <!--        </td>-->
 
-    </tr>
-</table>
+<!--    </tr>-->
+<!--</table>-->
 
-</body>
-</html>

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//  Chptr 17.4 Exercises OMG the ORM! (Creating a new persistent model/controller/templates to relate to Event. //
 @Entity
 public class EventCategory extends AbstractEntity {
 

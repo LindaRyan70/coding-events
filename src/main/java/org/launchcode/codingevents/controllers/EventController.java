@@ -139,6 +139,24 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
         return "redirect: ";
     }
 
+    /* Chptr 18.5.1 Persistence Tags (Creating a ManyToMany Relationship)
+    * Add additional method displayEventDetails() to utilize new EventDetailsRepository data fields to send to new detail.html */
+    @GetMapping("detail")
+    public String displayEventDetails(@RequestParam Integer eventId, Model model) {
+
+        Optional<Event> result = eventRepository.findById(eventId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Event ID: " + eventId);
+        } else {
+            Event event = result.get();
+            model.addAttribute("title", event.getName() + " Details");
+            model.addAttribute("event", event);
+        }
+        return "events/detail";
+    }
+
+
 /*  NOTE 17.3: Turned OFF 2 Edit Form Methods below b/c not sure how to refactor to replace static EventData with
               dynamic EventRepository. Though I WAS able to try and replace the EventType type enums with
               eventCategoryRepository and eventCategory respectively. But not sure if that will work and need to figure

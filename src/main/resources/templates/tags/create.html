@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
+<header th:replace="fragments :: header"></header>
+
+<form method="post" action="/tags/create">
+    <div class="form-group">
+        <label>Tag Name
+<!--  the book/video omits the type='text' since it is included/taken care of in the th:field expressions already. -->
+            <input type="text" th:field="${tag.name}" class="form-control">
+        </label>
+<!--  The book/video has the error be a <span> tag. -->
+        <p class="error" th:errors="${tag.name}"></p>
+    </div>
+    <br>
+    <!-- the input value='create' is simply what the text will be inside the submit button on the web page.
+    Not the same as an attribute name='valueVariable'.-->
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+<!--  The book/video code has a blue submit button with btn-primary, but I am using a green button with btn-success per above. -->
+<!--        <input type="submit" value="Create" class="btn btn-primary">-->
+    </div>
+</form>
+
+</body>
+</html>

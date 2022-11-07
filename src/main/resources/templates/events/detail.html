@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+
+<!-- Chptr 18.5.1 Persistence Tags (Creating a ManyToMany Relationship)
+        Made a new template to display the view for the EventDetails entity class data fields, as managed by the
+        displayEventDetails() controller method on EventController. -->
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <td th:text="${event.id}"></td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td th:text="${event.eventDetails.description}"></td>
+    </tr>
+    <tr>
+        <th>Contact Email</th>
+        <td th:text="${event.eventDetails.contactEmail}"></td>
+    </tr>
+    <tr>
+        <th>Location</th>
+        <td th:text="${event.eventDetails.location}"></td>
+    </tr>
+    <tr>
+        <th>Registration Required</th>
+        <td th:text="${event.eventDetails.register}"></td>
+    </tr>
+    <tr>
+        <th>Number of Attendees</th>
+        <td th:text="${event.eventDetails.numberOfAttendees}"></td>
+    </tr>
+
+<!--  NOTE: Not sure if I will add eventCategory.name field to this view template or not. Put here just in case, but commented off. -->
+<!--    <tr>-->
+<!--        <th>Event Category</th>-->
+<!--        <td th:text="${event.eventCategory.name}"></td>-->
+<!--    </tr>-->
+
+</table>
+
+</body>
+</html>
