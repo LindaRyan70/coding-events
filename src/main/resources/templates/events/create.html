@@ -9,6 +9,9 @@
 <!--    No longer need this general error message since added <p> tags with th:error=  for custom messages from Event.java -->
 <!--<p th:text="${errorMsg}" style="color:red;"></p>-->
 
+<!-- Chptr 18.4 OneToOne Relationship - Refactored the input and error lines for all fields moved to the new EventDetails
+     entity class: (description, contactEmail, location, register, and numberOfAttendees) by inserting the eventDetails
+     name into the call, since the fields are no longer direct fields of Event, i.e. (event.eventDetails.description).-->
 <form method="post" action="/events/create">
     <div class="form-group">
         <label>Name
@@ -24,39 +27,49 @@
             <!--   Refactor input to allow for @ModelBinding annotation.   -->
             <!--   <input type="text" name="eventDescription" class="form-control">-->
             <!--  The input line also works w/o (type="text") when you use Thymeleaf attribute (th:field=). -->
-            <input type="text" th:field="${event.description}" class="form-control">
+<!--            <input type="text" th:field="${event.description}" class="form-control">-->
+            <input type="text" th:field="${event.eventDetails.description}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.description}"></p>
+<!--        <p class="error" th:errors="${event.description}"></p>-->
+        <p class="error" th:errors="${event.eventDetails.description}"></p>
     </div>
     <div class="form-group">
         <label>Contact Email
             <!--  Added Email field to Event.java, along with Validation Annotations per Chptr 15.2, so had to add email
             to the create a new event form page view. -->
             <!--  The input line also works w/o (type="text") when you use Thymeleaf attribute (th:field=). -->
-            <input type="text" th:field="${event.contactEmail}" class="form-control">
+<!--            <input type="text" th:field="${event.contactEmail}" class="form-control">-->
+            <input type="text" th:field="${event.eventDetails.contactEmail}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.contactEmail}"></p>
+<!--        <p class="error" th:errors="${event.contactEmail}"></p>-->
+        <p class="error" th:errors="${event.eventDetails.contactEmail}"></p>
     </div>
 <!--   Chptr 15.6 Exercies: Model Validation - Added 3 new fields below and also to the Event model and index.html view.-->
     <div class="form-group">
         <label>Location
-            <input type="text" th:field="${event.location}" class="form-control">
+<!--            <input type="text" th:field="${event.location}" class="form-control">-->
+            <input type="text" th:field="${event.eventDetails.location}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.location}"></p>
+<!--        <p class="error" th:errors="${event.location}"></p>-->
+        <p class="error" th:errors="${event.eventDetails.location}"></p>
     </div>
     <br>
     <div class="form-group">
         <label>Registration Required?
-            <input type="checkbox" th:field="${event.register}">
+<!--            <input type="checkbox" th:field="${event.register}">-->
+            <input type="checkbox" th:field="${event.eventDetails.register}">
         </label>
-        <p class="error" th:errors="${event.register}"></p>
+<!--        <p class="error" th:errors="${event.register}"></p>-->
+        <p class="error" th:errors="${event.eventDetails.register}"></p>
     </div>
     <br>
     <div class="form-group">
         <label>Number of Attendees
-            <input type="text" th:field="${event.numberOfAttendees}" class="form-control">
+<!--            <input type="text" th:field="${event.numberOfAttendees}" class="form-control">-->
+            <input type="text" th:field="${event.eventDetails.numberOfAttendees}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.numberOfAttendees}"></p>
+<!--        <p class="error" th:errors="${event.numberOfAttendees}"></p>-->
+        <p class="error" th:errors="${event.eventDetails.numberOfAttendees}"></p>
     </div>
     <br>
 <!-- Chptr 16.2 Enums Practice/Video - Adding a drop-down box with the 4 different enum type value choices. -->
