@@ -3,6 +3,8 @@ package org.launchcode.codingevents.models;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 //  Chptr 17.2.3 Creating Persistent Models - Adding @ annotations to allow Hibernate to find/create database tables for MySQL
@@ -66,6 +68,10 @@ public class Event extends AbstractEntity {
     @NotNull
     private EventDetails eventDetails;
 
+    // Chptr 18.5.3 ManyToMany Relationship Event and Tag - Add list of tags that are Final, so no one can get rid of our list, but can modify contents. //
+    @ManyToMany
+    private final List<Tag> tags = new ArrayList<>();
+
 
 /*    Chptr 18.4 - Creating a One-to-One Relationship - Made a new EventDetails class and moved detail fields there.
                 Then modified the constructor to remove those fields and add the eventDetails field parameter. */
@@ -123,7 +129,17 @@ public class Event extends AbstractEntity {
 //        return id;
 //    }
 
-//  Custom toString, equals, hashCode methods:
+    /* Chptr 18.5.3 ManyToMany Relationship with Event and Tags - Create a Getter but no Setter b/c final.
+    But DO create a custom method to allow us to Add a Tag to the list with addTag() */
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    //  Custom toString, equals, hashCode methods:
     @Override
     public String toString() {
         return name;
