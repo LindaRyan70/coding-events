@@ -3,12 +3,16 @@ package org.launchcode.codingevents.controllers;
 //import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
+import org.launchcode.codingevents.data.TagRepository;
 import org.launchcode.codingevents.models.Event;
 // Chptr 18.2 - Many-to-One Relationship - Replaced EventType import below with EventCategory and EventCategoryRepository.
 //import org.launchcode.codingevents.models.EventType;
 import org.launchcode.codingevents.models.EventCategory;
+import org.launchcode.codingevents.models.Tag;
+import org.launchcode.codingevents.models.dto.EventTagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +45,10 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
     //  Chptr 18.2 - Many-to-One Relationship - Create an instance of EventCategoryRepository in our controller to replace EventType enums..
     @Autowired
     private EventCategoryRepository eventCategoryRepository;
+
+    // Chptr 18.5.5 - ManyToMany Form and DTO - Create an instance of TagRepository in our controller to access database.
+    @Autowired
+    private TagRepository tagRepository;
 
 /*  17.3 Refactor methods below to use eventRepository field to connect to database instead of static EventData file and
             to access EventRepository interface which implements CrudRepository interface methods:
@@ -152,9 +160,58 @@ encapsulates all the data-related behavior for Events in a Map<Integer, Event>  
             Event event = result.get();
             model.addAttribute("title", event.getName() + " Details");
             model.addAttribute("event", event);
+            /* Chptr 18.5.5 ManyToMany and DTO - Add the tags to the details view html  */
+            model.addAttribute("tags", event.getTags());
         }
         return "events/detail";
     }
+
+    /* Chptr 18.5.5 ManyToMany Form and DTO - method that creates form to allow you to assign a Tag to a specific Event */
+    /* Responds to /events/add-tag?eventId=13  */
+    @GetMapping("add-tag")
+     public String displayAddTagForm(@RequestParam Integer eventId, Model model) {
+        /* Get temporary Optional event obj 'result' from the repository database by its unique Integer 'eventId' */
+        Optional<Event> result = eventRepository.findById(eventId);
+        /* Get actual event object 'result' value from that id   */
+        Event event = result.get();
+        /* Create model attribute 'title' to assign a value. */
+        model.addAttribute("title", "Add Tag to: " + event.getName());
+        /* Create attribute 'tags' that contains a list of all tag instance values to populate drop-down. */
+        model.addAttribute("tags", tagRepository.findAll());
+
+//        /* Create attribute 'event' that contains event obj we just fetched from database, so form knows which event to add tag to. */
+//        model.addAttribute("event", event);
+
+        /* Instead of passing in the event directly above, set the event attribute to be the specific concrete object,
+        * so when it is passed into the template th:field, the value will be properly set and will not be null. */
+        EventTagDTO eventTag = new EventTagDTO();
+        eventTag.setEvent(event);   // event is from the Event event = result.get() further above in this method.
+
+        /* Create attribute that uses model binding w/ DTO to pass a single instance of a new EventTagDTO obj. */
+        model.addAttribute("eventTag", eventTag);
+        /* Return path to the html file that will render the form. */
+        return "events/add-tag";
+     }
+
+    /* Chptr 18.5.5 ManyToMany Form and DTO - method that processes the form after submission to allow you to assign a
+               Tag to a specific Event.  */
+     @PostMapping("add-tag")
+     public String processAddTagForm(@ModelAttribute @Valid EventTagDTO eventTag, Errors errors, Model model) {
+
+        if (!errors.hasErrors()) {
+            Event event = eventTag.getEvent();  // pull the event out of the EventTagDTO
+            Tag tag = eventTag.getTag();    // pull the tag out of the EventTagDTO
+            /* Check to make sure the tags list field in event does not already contain that tag. If not, add it to the
+                event and then save the updated event to the eventRepository. */
+            if (!event.getTags().contains(tag)) {
+                event.addTag(tag);  //
+                eventRepository.save(event);
+            }
+            return "redirect:detail?eventId=" + event.getId();  // If no errors, go the detail.html view for that particular event.
+        }
+
+        return "redirect:add-tag"; // If there is an error, return to the form.
+     }
 
 
 /*  NOTE 17.3: Turned OFF 2 Edit Form Methods below b/c not sure how to refactor to replace static EventData with

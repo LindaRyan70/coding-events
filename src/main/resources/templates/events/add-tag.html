@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<!-- Line below will be replaced by fragment named 'header' defined in fragments.html template.-->
+<header th:replace="fragments :: header"></header>
+
+<!--If it posts to a template/page that is different than this template page, add a different action='path/name'-->
+<form method="post">
+    <div class="form-group">
+        <!-- The input line below is hidden, so we can pass in form data on submission w/o showing to user to try to create
+              a new eventTagDTO obj eventTag and try to set the event field with the event at that event.id and the tag field
+              with the tag at the tag.id selected below.  -->
+        <input type="hidden" th:field="${eventTag.event}">
+        <select th:field="${eventTag.tag}">
+            <option th:each="tag : ${tags}"
+                    th:value="${tag.id}"
+                    th:text="${tag.name}">
+            </option>
+        </select>
+    </div>
+    <br>
+    <input type="submit" class="btn btn-success" value="Add Tag">
+</form>
+
+</body>
+</html>

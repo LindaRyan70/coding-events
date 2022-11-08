@@ -34,6 +34,19 @@
         <th>Number of Attendees</th>
         <td th:text="${event.eventDetails.numberOfAttendees}"></td>
     </tr>
+<!-- My Own Extra: Adding the EventCategory to the events/detail.html view -->
+    <tr>
+        <th>Event Category</th>
+        <td th:text="${event.eventCategory.name}"></td>
+    </tr>
+<!-- Chptr 18.5.5 ManyToMany Form and DTO - Add Tags row to show the name of tag related to am event using custom
+        Tag method .getDisplayName(). (The get() part is assumed by Thymeleaf since inside ${}.) -->
+    <tr>
+        <th>Tags</th>
+        <td>
+            <span th:each="tag : ${tags}" th:text="${tag.displayName} + ' '"></span>
+        </td>
+    </tr>
 
 <!--  NOTE: Not sure if I will add eventCategory.name field to this view template or not. Put here just in case, but commented off. -->
 <!--    <tr>-->
@@ -42,6 +55,9 @@
 <!--    </tr>-->
 
 </table>
+<!-- Chptr 18.5.5 ManyToMany and DTO - Add a hyperlink on the EventDetails view.html to allow users to go directly to
+        the add-tag form to add/assign a Tag or multiple Tags to that  specific Event. -->
+<a th:href="'/events/add-tag?eventId=' + ${event.id}">Add Tag</a>
 
 </body>
 </html>
