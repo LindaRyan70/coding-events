@@ -27,12 +27,14 @@ You can use both those custom/private styling files AND public Bootstrap styling
 <!-- Chapter 17.4 Exercise: I had to add nav link headings to the fragment for template links for EventCategoryController. -->
         <li class="nav-item"><a class="nav-link" href="/eventCategories">All Categories</a></li>
         <li class="nav-item"><a class="nav-link" href="/eventCategories/create">Create Category</a></li>
-<!-- Chptr 18.5.1 Persistent Tags (Creating a ManyToMany Relationship): Added nav-link headings to fragment for TagController. -->
+<!-- Chapter 18.5.1 Persistent Tags (Creating a ManyToMany Relationship): Added nav-link headings to fragment for TagController. -->
         <li class="nav-item"><a class="nav-link" href="/tags">All Tags</a></li>
         <li class="nav-item"><a class="nav-link" href="/tags/create">Create Tag</a></li>
+<!-- Chapter 19.4.6 Authentication (Logging Out): Added nav-link route to the logout() method in AuthenticationController. -->
+        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
 <!-- MY EXTRA Chapter 17.4 Exercises: I decided to add a Delete Categories controller method and template for extra practice. -->
 <!-- Unfortunately, in Chapter 18, I realized that I cannot actually delete an EventCategory b/c it causes an SQL constraint
-       error since it is a parent key and causes a foreign key contraint error. See EventCategoryController code comments
+       error since it is a parent key and causes a foreign key constraint error. See EventCategoryController code comments
        for more details. Turned this line off below for now, so the option does not display. -->
 <!--        <li class="nav-item"><a class="nav-link" href="/eventCategories/delete">Delete Category</a></li>-->
     </ul>

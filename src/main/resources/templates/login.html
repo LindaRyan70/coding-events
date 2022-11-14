@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+
+<!--<body class="container">-->
+<!-- Chapter 19 End: Replaced body line above to add inline styling to match post authentication page styling.
+    Also added inline style=color:red for <p class=errors> lines below. Not sure why it won't implement the styling
+    from head fragment like all other pages do. Unless it has to do with the AuthenticationFiltering methods? -->
+<body class="container" style="font-size: 18px; color: purple;">
 
 <header th:replace="fragments :: header"></header>
 
@@ -10,18 +15,18 @@
         <label th:for="username">Username
             <input class="form-control" th:field="${loginFormDTO.username}">
         </label>
-        <p class="error" th:errors="${loginFormDTO.username}"></p>
+        <p class="error" th:errors="${loginFormDTO.username}" style="color:red;"></p>
     </div>
     <div class="form-group">
         <label>Password
             <input class="form-control" th:field="${loginFormDTO.password}" type="password">
         </label>
-        <p class="error" th:errors="${loginFormDTO.password}"></p>
+        <p class="error" th:errors="${loginFormDTO.password}" style="color:red;"></p>
     </div>
     <br>
-    <input type="submit" class="btn btn-primary" value="Log In" />
+    <input type="submit" class="btn btn-success" value="Log In" />
 </form>
-
+<br>
 <p>Don't have an account? <a href="/register">Register for one.</a></p>
 
 </body>
